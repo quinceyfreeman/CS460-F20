@@ -3,17 +3,43 @@
 }
 .btn-group, .btn-group-toggle {
     padding: 2em;
-
 }
 .radioButtons, .input {
     display: flex;
     justify-content: center;
 }
-.emptyListOne, .emptyListTwo {
+.listTitle {
+    font-style: italic;
+}
+.emptyList {
     background-color: #313e50;
     color: #cdcdcd;
-    height: 175px;
+    height: 20em;
     border-radius: 20px;
-    padding: 20%;
+    padding: 10em 1em 0 1em;
     font-style: oblique;
+}
+.task {
+    display: flex;
+    margin-bottom: 1em;
+    justify-content: center;
+}
+.text {
+    margin-bottom: 1em;
+    height: 75px;
+    width: 60%;
+    background-color: #313e50;
+    color: #cdcdcd;
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+    text-align: center;
+    padding: 1.7em;
+}
+.completeBtn {
+    border: none;    
+    height: 75px;
+    width: 50px;
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+    background-color: #278ea5;
 }
