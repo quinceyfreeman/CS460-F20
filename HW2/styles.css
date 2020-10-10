@@ -1,0 +1,19 @@
+.col, .row {
+    border: 1px solid red;
+}
+.btn-group, .btn-group-toggle {
+    padding: 2em;
+
+}
+.radioButtons, .input {
+    display: flex;
+    justify-content: center;
+}
+.emptyListOne, .emptyListTwo {
+    background-color: #313e50;
+    color: #cdcdcd;
+    height: 175px;
+    border-radius: 20px;
+    padding: 20%;
+    font-style: oblique;
+}
