@@ -8,36 +8,55 @@
 </head>
 <body>
 
-    <div class="container">
+    <div class="container-fluid">
         <div class="row">
             <h1>To Do List</h1>
         </div>
 
+
+        <div class="toast">
+            <div class="toast-header">
+              Toast Header
+            </div>
+            <div class="toast-body">
+              Some text inside the toast body
+            </div>
+          </div>
+
+          
+
         <hr>
         <div class="row">
-            <h4>How to Use</h4>
-            <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Expedita exercitationem, maiores molestiae distinctio veniam earum recusandae officiis eum ipsam labore illum minima in quos beatae commodi, nostrum ab error aut?</p>
-        </div>
+            <div class="col">
+                <h4>How to Use</h4>
+                <p>A simple to-do list. Enter a task and pick from one of the two different to-do lists. Once you are done with the specific task, just click the checkmark next to the task to remove it from the list.</p>
+            </div>
 
-        <!-- This is where the user will input their tasks -->
-        <div class="row input">
-                <input type="text" class="textField" name="userInput" id="userInput" placeholder="enter task">
-                <button type="button" class="addButton" id="addButton">
-                    <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-plus" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                        <path fill-rule="evenodd" d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/>
-                    </svg>
-                </button>
-        </div>
+            <div class="col">
 
-        <!-- This is where the user will decide from two types of lists -->
-        <div class="row radioButtons">
-            <div class="btn-group btn-group-toggle" data-toggle="buttons">
-                <label class="btn btn-secondary">
-                    <input type="radio" name="listOneBtn" id="listOneBtn"> List One
-                </label>
-                <label class="btn btn-secondary">
-                    <input type="radio" name="listTwoBtn" id="listTwoBtn"> List Two
-                </label>
+                <!-- This is where the user will input their tasks -->
+                <div class="row input">
+                    <div class="textAddBtn">
+                        <input type="text" class="textField" name="userInput" id="userInput" placeholder="enter task">
+                        <button type="button" class="addButton" id="addButton">
+                            <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-plus" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                <path fill-rule="evenodd" d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- This is where the user will decide from two types of lists -->
+                <div class="row radioButtons">
+                    <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                        <label class="btn btn-secondary">
+                            <input type="radio" name="listOneBtn" id="listOneBtn"> List One
+                        </label>
+                        <label class="btn btn-secondary">
+                            <input type="radio" name="listTwoBtn" id="listTwoBtn"> List Two
+                        </label>
+                    </div>
+                </div>
             </div>
         </div>
 
@@ -58,25 +77,25 @@
                 </div>
             </div>
 
-                <div class="col text-center">
-                    <h3 class="listTitle">List Two</h3>
-                    <hr>
-                    <div class="listTwo">
+            <div class="col text-center">
+                <h3 class="listTitle">List Two</h3>
+                <hr>
+                <div class="listTwo">
 
-                        <div class="emptyList" id="emptyListTwo">
-                            <div class="emptyListText">
-                                <p>There are currently no tasks included in this list.</p>
-                            </div>
+                    <div class="emptyList" id="emptyListTwo">
+                        <div class="emptyListText">
+                            <p>There are currently no tasks included in this list.</p>
                         </div>
-    
                     </div>
+    
                 </div>
-
             </div>
 
         </div>
 
     </div>
+
+</div>
     
 
     <!-- Bootstrap and jQuery cdn -->

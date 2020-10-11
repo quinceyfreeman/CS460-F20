@@ -1,12 +1,39 @@
 .col, .row {
-    border: 1px solid red;
+    /* border: 1px solid red; */
+}
+body {
+    padding: 1em 2em 0 2em;
+}
+.textAddBtn {
+    display: flex;
+}
+.addButton {
+    border: none;
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+    background-color: #19d3da;
+    width: 50px;
+}
+.textField {
+    border: none;
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+    width: 30em;
+    background-color: #313e50;
+    color: #cdcdcd;
+    height: 50px;
+    text-align: center;
 }
 .btn-group, .btn-group-toggle {
     padding: 2em;
 }
+.input {
+    padding-top: 1em;
+}
 .radioButtons, .input {
     display: flex;
     justify-content: center;
+    padding-bottom: 2em;
 }
 .listTitle {
     font-style: italic;
