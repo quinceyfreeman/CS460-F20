@@ -22,18 +22,46 @@ function makeTaskElement (input, listName) {
 
 }
 
+function makeNotifyElement(listName) {
+    let notify = $('.notifyElement');
+    notify.prepend(`
+    <div class="notify">
+        <div class="notifyText">
+            <p>${listName} selected for task</p>
+        </div>
+    </div>`).hide().fadeIn(250);
+
+    notify.delay(1000).queue(function(next) {
+
+        $('.notify').fadeOut(300);
+        next();
+    })
+    notify.delay(1000).queue(function(next) {
+
+        notify.empty();
+        next();
+    })
+}
+
+function makeEmptyElement(listName) {
+    let list = $(listName);
+    list.append(`
+    <div class="emptyList" id="emptyListOne">
+        <p class="emptyListText">There are currently no tasks included in this list.</p>
+    </div>`).hide().fadeOut(250);
+}
+
 $('#listOneBtn').click(function() {
     listOneRadioBtn = true;
     listTwoRadioBtn = false;
 
-    console.log(listOneRadioBtn, listTwoRadioBtn);
+    makeNotifyElement('List One');
 })
 $('#listTwoBtn').click(function() {
     listOneRadioBtn = false;
     listTwoRadioBtn= true;
 
-    console.log(listOneRadioBtn, listTwoRadioBtn);
-
+    makeNotifyElement('List Two');
 })
 
 
@@ -56,6 +84,10 @@ $('#addButton').click(function() {
 
         if(listOneRadioBtn == true && listTwoRadioBtn == false) {
             $('#emptyListOne').fadeOut(500);
+            $('#emptyListOne').delay(500).queue(function(next) {
+                $('#emptyListOne').remove()
+                next();
+            });
 
             list1.delay(1000).queue(function(next) {
 
@@ -65,6 +97,10 @@ $('#addButton').click(function() {
         }
         else if(listTwoRadioBtn == true && listOneRadioBtn == false) {
             $('#emptyListTwo').fadeOut(500);
+            $('#emptyListTwo').delay(500).queue(function(next) {
+                $('#emptyListTwo').remove()
+                next();
+            });
 
             list2.delay(1000).queue(function(next) {
                 list2.append(makeTaskElement(userInput, listTwoDiv));
@@ -81,7 +117,12 @@ $(document).on('click', '.completeBtn', function() {
     $(this).parent().parent().css({'text-decoration': 'line-through'});
 
     $(this).delay(500).queue(function(next) {
-        $(this).parent().parent().fadeOut(1000);
-        next()
-    }); 
+        $(this).parent().parent().fadeOut(500);
+        next();
+    });
+
+    $(this).delay(500).queue(function(next) {
+        $(this).parent().parent().remove();
+        next();
+    });
 })
