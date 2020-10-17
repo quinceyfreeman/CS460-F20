@@ -1,13 +1,13 @@
 ﻿using System;
 namespace Homework_3
 {
-    public interface IQueueInterface
+    public interface IQueueInterface<T>
     {
-        T Push<T>(T element);
+        T Push(T element);
 
-        T Pop<T>();
+        T Pop();
 
-        T Peek<T>();
+        T Peek();
 
         bool IsEmpty();
     }
