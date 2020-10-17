@@ -1,10 +1,15 @@
 ﻿using System;
 namespace Homework_3
 {
-    public class Node
+    public class Node<T>
     {
-        public Node()
+        public T data;
+        public Node<T> next;
+
+        public Node (T data, Node<T> next)
         {
+            this.data = data;
+            this.next = next;
         }
     }
 }
