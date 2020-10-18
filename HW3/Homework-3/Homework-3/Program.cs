@@ -61,6 +61,57 @@ namespace Homework_3
                 i++;
             }
             reader.Close();
+            int spacesRemaining = WrapSimply(words, C, outputFileName);
+            Console.WriteLine("Total spaces remaining (Greedy): " + spacesRemaining);
+        }
+
+        private static int WrapSimply(IQueueInterface<string> words, int columnLength, string outputFilename)
+        {
+            StreamWriter output;
+
+            try
+            {
+                output = new StreamWriter(outputFilename);
+            }
+            catch (FileNotFoundException)
+            {
+                Console.WriteLine("Cannot create or open " + outputFilename +
+                        " for writing.  Using standard output instead.");
+                output = new StreamWriter(Console.OpenStandardOutput());
+            }
+
+            int col = 1;
+            int spacesRemaining = 0;
+
+            while (!words.IsEmpty())
+            {
+                string str = words.Peek();
+                int len = str.Length;
+
+                if (col == 1)
+                {
+                    output.Write(str);
+                    col += len;
+                    words.Pop();
+                }
+                else if ((col + len) >= columnLength)
+                {
+                    output.WriteLine();
+                    spacesRemaining += (columnLength - col) + 1;
+                    col = 1;
+                }
+                else
+                {
+                    output.Write(" ");
+                    output.Write(str);
+                    col += (len + 1);
+                    words.Pop();
+                }
+            }
+            output.WriteLine();
+            output.Flush();
+            output.Close();
+            return spacesRemaining;
         }
     }
 }
