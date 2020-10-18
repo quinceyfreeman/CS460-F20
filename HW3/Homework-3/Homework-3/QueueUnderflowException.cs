@@ -8,7 +8,7 @@ namespace Homework_3
         {
 
         }
-        public QueueUnderflowException(String message)
+        public QueueUnderflowException(string message)
             : base(message)
         {
 

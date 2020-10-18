@@ -20,7 +20,7 @@ namespace Homework_3
 
         public T Peek()
         {
-            if (this.IsEmpty() )
+            if (IsEmpty() )
             {
                 throw new QueueUnderflowException("The queue was empty when peek was invoked.");
             }
