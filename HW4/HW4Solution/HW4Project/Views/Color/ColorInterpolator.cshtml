@@ -1,9 +1,31 @@
 @{
     ViewData["Title"] = "Color Interpolator";
 }
+<h3>Interpolate from one color to another</h3>
+<h6>Please enter colors in HTML hexadecimal format: #AABBCC</h6>
 
 <div class="row">
     <div class="col">
-        <h3>Color Interpolator</h3>
+        <form asp-controller="Color" asp-action="ColorInterpolator" method="post">
+                <div class="form-group">
+                    <label>First Color
+                        <input type="text" name="FirstColor" class="form-control" placeholder="#AABBCC">
+                    </label>
+                </div>
+                <div class="form-group">
+                    <label>Second Color
+                        <input type="text" name="SecondColor" class="form-control" placeholder="#123456">
+                    </label>
+                </div>
+                <div class="form-group">
+                    <label>Number of Colors
+                        <input type="number" name="NumberOfColors" class="form-control">
+                    </label>
+                </div>  
+            <button type="submit" class="btn btn-outline-primary">Generate Colors</button>
+        </form>
+    </div>
+    <div class="col">
+        @* Where HTML hexadecimal values and colors will go *@
     </div>
 </div>

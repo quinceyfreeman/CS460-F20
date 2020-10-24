@@ -11,9 +11,16 @@ namespace HW4Project.Controllers
 {
     public class ColorController : Controller
     {
+        [HttpGet]
         public IActionResult ColorInterpolator()
         {
             return View();
+        }
+        [HttpPost]
+        public IActionResult ColorInterpolator(ColorInterpolation c)
+        {
+            Debug.WriteLine(c);
+            return View("ColorInterpolator", c);
         }
     }
 }
