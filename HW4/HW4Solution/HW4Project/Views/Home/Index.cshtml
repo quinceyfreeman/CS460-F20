@@ -15,11 +15,11 @@
     <div class="col">
         <h2 class="display-5">RGB Color</h2>
         <p>Want to know what a particular RGB color looks like? How about it's web color format? Here you go. Uses query strings to send form data to the server, which reads them in the Request object. It then performs that calculation and formats the result in a view to return to you.</p>
-        <a class="btn btn-primary" asp-action="RGBColor" role="button">Try it out >></a>
+        <a class="btn btn-primary" asp-controller="RGB" asp-action="RGBColor" role="button">Try it out >></a>
     </div>
     <div class="col">
         <h2 class="display-5">Color Interpolation</h2>
         <p>Typical online color choosers are way too useful. We wanted something fun and completely useless. This form POST's the data to the server and uses parameter binding to make it easy.</p>
-        <a class="btn btn-primary" asp-action="ColorInterpolator" role="button">Try it out >></a>
+        <a class="btn btn-primary" asp-controller="Color" asp-action="ColorInterpolator" role="button">Try it out >></a>
     </div>
 </div>
