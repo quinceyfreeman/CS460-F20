@@ -1,16 +1,19 @@
+@model string
 @{
     ViewData["Title"] = "RGB Color";
+    string color = (@Model != "") ? "#"+ @Model : "#000";
 }
 
 <h3>Enter an RGB Color to see what it looks like!</h3>
+
 <div class="row">
     <div class="col">
-        <form asp-controller="Home" asp-action="RGBColor" method="get">
+        <form asp-controller="RGB" asp-action="RGBColor" method="get">
             <div class="form-group">
                 <div class="input-group mb-2">
                     <div class="input-group-prepend">
                         <div class="input-group-text">R</div>
-                    </div>
+                </div>
                 <input type="number" name="red" class="form-control" id="inlineFormInputGroup" placeholder="0 - 255">
             </div>
 
@@ -28,36 +31,17 @@
                         <div class="input-group-text">B</div>
                     </div>
                 <input type="number" name="blue" class="form-control" id="inlineFormInputGroup" placeholder="0 - 255">
+                        </div>
+                    </div>
+                </div>
             </div>
             
-
-
             <button type="submit" class="btn btn-outline-primary">Display</button>
         </form>
     </div>
-    <div class="col">
 
+    <div class="col">
+        <div style="height: 20em; width: 20em; background-color:@color"></div>
+        <div><p>@color</p></div>
     </div>
 </div>
-
-@* 
-
-        <div class="input-group mb-2">
-            <div class="input-group-prepend">
-                <div class="input-group-text">R</div>
-            </div>
-            <input type="number" class="form-control" id="inlineFormInputGroup" placeholder="0">
-        </div>
-        <div class="input-group mb-2">
-            <div class="input-group-prepend">
-                <div class="input-group-text">G</div>
-            </div>
-            <input type="number" class="form-control" id="inlineFormInputGroup" placeholder="0">
-        </div>
-        <div class="input-group mb-2">
-            <div class="input-group-prepend">
-                <div class="input-group-text">B</div>
-            </div>
-            <input type="number" class="form-control" id="inlineFormInputGroup" placeholder="0">
-        </div>
-        <button type="submit" class="btn btn-primary">Display</button> *@
