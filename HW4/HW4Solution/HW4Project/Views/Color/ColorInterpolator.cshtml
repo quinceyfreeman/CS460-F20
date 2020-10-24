@@ -1,3 +1,4 @@
+@model ColorInterpolation
 @{
     ViewData["Title"] = "Color Interpolator";
 }
@@ -26,6 +27,19 @@
         </form>
     </div>
     <div class="col">
-        @* Where HTML hexadecimal values and colors will go *@
+        @if (Model != null)
+        {
+            <table>
+                <th><strong>HTML</strong></th>
+                <th><strong>Color</strong></th>
+                @foreach (string color in Model.ColorSet)
+                {
+                    <tr>
+                        <td>@color</td>
+                        <td style="background-color: @color; width: 150px; height: 40px;"></td>
+                    </tr>
+                }
+            </table>
+        }
     </div>
 </div>
