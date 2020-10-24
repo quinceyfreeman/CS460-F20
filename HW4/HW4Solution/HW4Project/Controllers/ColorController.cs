@@ -23,18 +23,13 @@ namespace HW4Project.Controllers
             if(ModelState.IsValid)
             {
                 c.ColorSet = ColorList(c);
-                
-                for(int i = 0; i < c.NumberOfColors; i++)
-                {
-                    Debug.WriteLine(c.ColorSet.ElementAt(i));
-                }
-                Debug.WriteLine(c);
+                Debug.WriteLine("Model is OK");
                 return View("ColorInterpolator", c);
             }
             else
             {
-            Debug.WriteLine(c);
-            return View("ColorInterpolator", c);
+                Debug.WriteLine("Model is INVALID");
+                return View("ColorInterpolator", c);
             }
         }
         public static void ColorToHSV(Color color, out double hue, out double saturation, out double value)

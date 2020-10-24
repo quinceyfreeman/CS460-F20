@@ -8,19 +8,20 @@
 <div class="row">
     <div class="col">
         <form asp-controller="Color" asp-action="ColorInterpolator" method="post">
+            <div asp-validation-summary="All"></div>
                 <div class="form-group">
                     <label>First Color
-                        <input type="text" name="FirstColor" class="form-control" placeholder="#AABBCC" required pattern="#[0-9A-F]{6}">
+                        <input type="text" name="FirstColor" class="form-control" placeholder="#AABBCC" required pattern="^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$">
                     </label>
                 </div>
                 <div class="form-group">
                     <label>Second Color
-                        <input type="text" name="SecondColor" class="form-control" placeholder="#123456" required pattern="#[0-9A-F]{6}">
+                        <input type="text" name="SecondColor" class="form-control" placeholder="#123456" required pattern="^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$">
                     </label>
                 </div>
                 <div class="form-group">
                     <label>Number of Colors
-                        <input type="number" name="NumberOfColors" class="form-control">
+                        <input type="number" name="NumberOfColors" class="form-control" placeholder="2" required min="2">
                     </label>
                 </div>  
             <button type="submit" class="btn btn-outline-primary">Generate Colors</button>

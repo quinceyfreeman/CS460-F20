@@ -7,12 +7,11 @@ namespace HW4Project.Models
     public class ColorInterpolation
     {
         [Required]
-        [RegularExpression("#[0-9A-F]{6}")]
         public string FirstColor {get; set; }
         [Required]
-        [RegularExpression("#[0-9A-F]{6}")]
         public string SecondColor { get; set; }
         [Required]
+        [Range(2,Int32.MaxValue)]
         public int NumberOfColors { get; set; }
         public IEnumerable<string> ColorSet { get; set; }
 
