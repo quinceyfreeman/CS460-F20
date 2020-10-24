@@ -10,26 +10,26 @@ using System.Drawing;
 
 namespace HW4Project.Controllers
 {
-    public class ColorController : Controller
+    public class ColorInterpolatorController : Controller
     {
         [HttpGet]
-        public IActionResult ColorInterpolator()
+        public IActionResult create()
         {
             return View();
         }
         [HttpPost]
-        public IActionResult ColorInterpolator(ColorInterpolation c)
+        public IActionResult create(ColorInterpolation c)
         {
             if(ModelState.IsValid)
             {
                 c.ColorSet = ColorList(c);
                 Debug.WriteLine("Model is OK");
-                return View("ColorInterpolator", c);
+                return View("create", c);
             }
             else
             {
                 Debug.WriteLine("Model is INVALID");
-                return View("ColorInterpolator", c);
+                return View("create", c);
             }
         }
         public static void ColorToHSV(Color color, out double hue, out double saturation, out double value)

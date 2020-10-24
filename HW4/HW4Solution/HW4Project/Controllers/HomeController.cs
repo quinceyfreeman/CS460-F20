@@ -22,6 +22,14 @@ namespace HW4Project.Controllers
         {
             return View();
         }
+        
+        [HttpGet]
+        public IActionResult RGBColor(int? red, int? green, int? blue)
+        {
+            string hexValue = string.Format("{0:X2}{1:X2}{2:X2}", red, green, blue);
+            Debug.WriteLine(hexValue);
+            return View("RGBColor", hexValue);
+        }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
