@@ -22,7 +22,11 @@ namespace HW5Project.Controllers
             return View();
         }
 
-        public IActionResult Privacy()
+        public IActionResult Add()
+        {
+            return View();
+        }
+        public IActionResult List()
         {
             return View();
         }
