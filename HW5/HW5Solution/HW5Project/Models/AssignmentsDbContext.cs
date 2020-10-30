@@ -29,7 +29,7 @@ namespace HW5Project.Models
         {
             modelBuilder.Entity<Assignments>(entity =>
             {
-                entity.Property(e => e.Id).ValueGeneratedNever();
+                entity.Property(e => e.Id).ValueGeneratedOnAdd();
             });
 
             OnModelCreatingPartial(modelBuilder);
