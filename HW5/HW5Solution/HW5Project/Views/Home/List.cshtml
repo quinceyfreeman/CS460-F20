@@ -1,3 +1,24 @@
-<div class="text-center">
-    <h1 class="display-4">List</h1>
-</div>
+@model IEnumerable<HW5Project.Models.Assignments>
+
+<h1 class="text-center display-4">List</h1>
+<p>Here is the list of all your assignments.</p>
+
+<table class="table table-bordered table-striped table-sm">
+    <thead>
+        <tr>
+            <th>Priority</th><th>Due Date</th><th>Course</th><th>Title</th><th>Notes</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (HW5Project.Models.Assignments assignment in Model)
+        {
+            <tr>
+            <td>@assignment.Priority</td>
+            <td>@assignment.DueDate</td>
+            <td>@assignment.Course</td>
+            <td>@assignment.Title</td>
+            <td>@assignment.Notes</td>
+            </tr>
+        }
+    </tbody>
+</table>

@@ -13,7 +13,7 @@ namespace HW5Project.Models
         public long Priority { get; set; }
         [Required]
         [Column(TypeName = "DATETIME")]
-        public byte[] DueDate { get; set; }
+        public DateTime DueDate { get; set; }
         [Required]
         [Column(TypeName = "NVARCHAR(10)")]
         public string Course { get; set; }

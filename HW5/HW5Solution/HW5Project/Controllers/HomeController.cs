@@ -17,18 +17,20 @@ namespace HW5Project.Controllers
             this.db = db;
         }
 
+        [HttpGet]
         public IActionResult Index()
         {
             return View();
         }
 
+        [HttpGet]
         public IActionResult Add()
         {
             return View();
         }
         public IActionResult List()
         {
-            return View();
+            return View(db.Assignments);
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
