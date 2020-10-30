@@ -28,6 +28,27 @@ namespace HW5Project.Controllers
         {
             return View();
         }
+
+        [HttpPost]
+        public IActionResult Add(Assignments assignment)
+        {
+            if (ModelState.IsValid)
+            {
+                db.Add(assignment);
+                db.SaveChanges();
+                return RedirectToAction("Confirmation");
+            }
+            else
+            {
+                return View(assignment);
+            }
+        }
+
+        public IActionResult Confirmation()
+        {
+            return View();
+        }
+
         public IActionResult List()
         {
             return View(db.Assignments);

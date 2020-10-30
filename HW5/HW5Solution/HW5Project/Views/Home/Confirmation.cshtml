@@ -1,0 +1,15 @@
+    
+    <div class="row">
+        <div class="col">
+            <h1>Assignment Added!</h1>
+            <p>There is now one more assignments that needs completed.</p>
+        </div>
+        <div class="col">
+            <form asp-action="Home" method="post">
+            <h4>Want to view your assignments?</h4>
+            <button class="btn btn-dark" asp-controller="Home" asp-action="List">Click Me</button>
+            <h4>Want to add another assignment?</h4>
+            <button class="btn btn-dark" asp-controller="Home" asp-action="Add">Click Me</button>
+            </form>
+        </div>
+    </div>
