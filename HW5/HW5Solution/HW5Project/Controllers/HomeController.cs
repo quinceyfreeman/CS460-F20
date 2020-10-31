@@ -49,9 +49,33 @@ namespace HW5Project.Controllers
             return View();
         }
 
-        public IActionResult List()
+        public IActionResult List(string sortOrder)
         {
-            return View(db.Assignments);
+            var assignments = from s in db.Assignments
+                              select s;
+            switch(sortOrder)
+            {
+                case "Priority":
+                    assignments = assignments.OrderByDescending(s => s.Priority);
+                    break;
+                case "Due Date":
+                    assignments = assignments.OrderBy(s => s.DueDate);
+                    break;
+                case "Course":
+                    assignments = assignments.OrderBy(s => s.Course);
+                    break;
+                default:
+                    assignments = assignments.OrderBy(s => s.Id);
+                    break;
+            }
+            return View("List", assignments);
+        }
+        public IActionResult Done(long Id)
+        {
+            Assignments assignment = db.Assignments.Find(Id);
+            db.Remove(assignment);
+            db.SaveChanges();
+            return RedirectToAction("List");
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
