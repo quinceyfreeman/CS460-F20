@@ -28,6 +28,7 @@ namespace HW5Project
             services.AddDbContext<AssignmentsDbContext>(opts => {
                 opts.UseSqlite(Configuration["ConnectionStrings:AssignmentsConnection"]);
             });
+            services.AddRazorPages().AddRazorRuntimeCompilation();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

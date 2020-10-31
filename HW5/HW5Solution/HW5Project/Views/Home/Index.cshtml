@@ -3,6 +3,27 @@
 }
 
 <div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+    <h1 class="display-4 mb-5 ">Assignment Tracker</h1>
+</div>
+
+<div class="container">
+    <div class="row">
+
+        <div class="col">
+            <h4 class="mb-4">Need to keep track of assignments?</h4>
+            <p>This project allows you to do just that. You can add assignments with a given priority and show when they are due, what course the assignment is for, give the assignments a title and give any assignment a note to remind you of anything.</p>
+        </div>
+
+        <div class="col">
+            <img src="~/images/table.png" style="width: 150%; box-shadow: 5px 10px 18px #888888; padding: 0.5em; border-radius: 10px;">
+        </div>
+
+    </div>
+    <div class="col">
+        <div class="text-center">
+            <h2 class="display-4 mt-5">Getting Started</h2>
+            <p class="mt-4">Get organized and never miss a due date by keeping all your assignments and due dates in one place</p>
+            <a asp-controller="Home" asp-action="Add"><button class="btn btn-dark mt-3">Add an Assignment</button></a>
+        </div>
+    </div>
 </div>
