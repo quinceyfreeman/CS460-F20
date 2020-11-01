@@ -11,7 +11,7 @@ namespace HW5Project.Controllers
 {
     public class HomeController : Controller
     {
-        private AssignmentsDbContext db;
+        public AssignmentsDbContext db;
         public HomeController(AssignmentsDbContext db)
         {
             this.db = db;
@@ -76,6 +76,14 @@ namespace HW5Project.Controllers
             db.Remove(assignment);
             db.SaveChanges();
             return RedirectToAction("List");
+        }
+        public IActionResult Edit(long Id, string Note)
+        {
+            Assignments assignment = db.Assignments.Find(Id);
+            assignment.Notes = Note;
+            db.SaveChanges();
+            
+            return RedirectToAction("List");            
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

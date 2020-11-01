@@ -1,4 +1,4 @@
-@model IEnumerable<HW5Project.Models.Assignments>
+@model IEnumerable<HW5Project.Models.Assignments>;
 @{
     ViewData["Title"] = "List";
 }
@@ -28,7 +28,12 @@
     <tbody>
         @foreach (HW5Project.Models.Assignments assignment in Model)
         {
-            <tr>
+            string targetId = @assignment.Id.ToString();
+            string target = "#accordion"+targetId;
+            string hidden = "accordion"+targetId;
+            double daysLeft = Math.Floor((assignment.DueDate - DateTime.Today).TotalDays);
+
+            <tr data-toggle="collapse" data-target= @target class="clickable collapse-row collapsed">
             <td>@assignment.Priority</td>
             <td>@assignment.DueDate</td>
             <td>@assignment.Course</td>
@@ -43,6 +48,47 @@
 
             </td>
             </tr>
+
+            <tr class="collapsed">
+                <td colspan="6">
+                    <div id= @hidden class="collapse">
+                            <div style="width: auto">
+                                <div class="text-center">
+                                <h1 class="display-6 mt-5">@assignment.Title</h1>
+                                @if (daysLeft < 1)
+                                {
+                                    <p>This assignment is due today</p>
+                                }
+                                else {
+                                    <p>This assignment is due in @daysLeft days.</p>
+                                }
+                                </div>
+                            
+                            </div>
+                            
+                            <div class="row justify-content-center mt-5">
+                                
+                                @* idea from https://stackoverflow.com/q/11293048 *@
+                                @using (Html.BeginForm("Edit","Home", new {id = assignment.Id})) {
+                                    <div class="input-group mb-5">
+                                    <input type="text" name="Note" class="form-control" placeholder="New Note" aria-label="New Note" aria-describedby="button-addon2">
+                                    <div class="input-group-append">
+                                        <button class="btn btn-outline-secondary" type="submit" id="button-addon2" value="Check your value!">Edit</button>
+                                    </div>
+                                    </div>
+                                }
+                            </div>
+                                
+
+                    </div>
+                </td>
+            </tr>
         }
     </tbody>
 </table>
+
+<script>
+    $(#lnk).click(function() {
+        $('#lnk').replace("href", $('#txtSearch').val());
+    })
+</script>
