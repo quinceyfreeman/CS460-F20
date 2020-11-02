@@ -1,0 +1,94 @@
+@model IEnumerable<HW5Project.Models.Assignments>;
+@{
+    ViewData["Title"] = "List";
+}
+<h1 class="text-center display-4">List</h1>
+<p>Here is the list of all your assignments.</p>
+
+<table class="table table-bordered table-striped table-sm">
+    <thead>
+        <tr>
+            <th>
+                @Html.ActionLink("Priority", "List", new { sortOrder = "Priority"})
+            </th>
+            <th>
+                @Html.ActionLink("Due Date", "List", new { sortOrder = "Due Date"})
+            </th>
+            <th>
+                @Html.ActionLink("Course", "List", new { sortOrder = "Course"})
+            </th>
+            <th>
+                Title
+            </th>
+            <th colspan="2">
+               Notes
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (HW5Project.Models.Assignments assignment in Model)
+        {
+            string targetId = @assignment.Id.ToString();
+            string target = "#accordion"+targetId;
+            string hidden = "accordion"+targetId;
+            double daysLeft = Math.Floor((assignment.DueDate - DateTime.Today).TotalDays);
+
+            <tr data-toggle="collapse" data-target= @target class="clickable collapse-row collapsed">
+            <td>@assignment.Priority</td>
+            <td>@assignment.DueDate.ToShortDateString()</td>
+            <td>@assignment.Course</td>
+            <td>@assignment.Title</td>
+            <td style="border-right: none;">@assignment.Notes</td>
+            <td style="text-align: center; border-left: none;">
+                <a href="@Url.Action("Done", "Home", new {id = assignment.Id})" class="btn">
+                    <svg width="1.5em" height="1.5em" viewBox="0 0 16 16" class="bi bi-check2-square" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                        <path fill-rule="evenodd" d="M15.354 2.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3-3a.5.5 0 1 1 .708-.708L8 9.293l6.646-6.647a.5.5 0 0 1 .708 0z"/>
+                        <path fill-rule="evenodd" d="M1.5 13A1.5 1.5 0 0 0 3 14.5h10a1.5 1.5 0 0 0 1.5-1.5V8a.5.5 0 0 0-1 0v5a.5.5 0 0 1-.5.5H3a.5.5 0 0 1-.5-.5V3a.5.5 0 0 1 .5-.5h8a.5.5 0 0 0 0-1H3A1.5 1.5 0 0 0 1.5 3v10z"/>
+                    </svg>
+                </a>
+
+            </td>
+            </tr>
+
+            <tr class="collapsed">
+                <td colspan="6">
+                    <div id= @hidden class="collapse">
+                        <div style="width: auto">
+                            <div class="text-center">
+                                <h1 class="display-6 mt-5">@assignment.Course - @assignment.Title</h1>
+                                @if (daysLeft < 1)
+                                {
+                                    <p>This assignment is due today</p>
+                                }
+                                else {
+                                    <p>This assignment is due in @daysLeft days.</p>
+                                }
+                                <p>on @assignment.DueDate.ToShortDateString() at @assignment.DueDate.ToShortTimeString().</p>
+                                <h4 class="mt-5">Current Note</h4>
+                                <p>@assignment.Notes</p>
+                                </div>
+                            </div>
+                            
+                            <div class="row justify-content-center mt-2">
+                                
+                            @* idea from https://stackoverflow.com/q/11293048 *@
+                            @using (Html.BeginForm("Edit","Home", new {id = assignment.Id})) {
+                                <div class="input-group mb-5">
+                                <input type="text" name="Note" class="form-control" placeholder="Edit Note" aria-label="New Note" aria-describedby="button-addon2">
+                                <div class="input-group-append">
+                                    <button class="btn btn-outline-secondary" type="submit" id="button-addon2" value="Check your value!">
+                                        <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-pencil-square" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456l-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>
+                                            <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"/>
+                                        </svg>
+                                    </button>
+                                </div>
+                            </div>
+                            }
+                        </div>
+                    </div>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

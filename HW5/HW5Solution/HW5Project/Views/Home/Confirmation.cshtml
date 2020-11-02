@@ -1,0 +1,15 @@
+@{
+    ViewData["Title"] = "Confirm";
+}
+    <div class="row">
+        <div class="col">
+            <h1>Assignment Added!</h1>
+            <p>There is now one more assignments that needs completed.</p>
+        </div>
+        <div class="col">
+            <h4>Want to view your assignments?</h4>
+            <a asp-controller="Home" asp-action="List"><button class="btn btn-dark">Click Me</button></a>
+            <h4>Want to add another assignment?</h4>
+            <a asp-controller="Home" asp-action="Add"><button class="btn btn-dark">Click Me</button></a>
+        </div>
+    </div>

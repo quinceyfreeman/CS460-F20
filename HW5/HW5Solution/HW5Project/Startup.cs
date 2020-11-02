@@ -7,6 +7,8 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.EntityFrameworkCore;
+using HW5Project.Models;
 
 namespace HW5Project
 {
@@ -23,6 +25,10 @@ namespace HW5Project
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
+            services.AddDbContext<AssignmentsDbContext>(opts => {
+                opts.UseSqlite(Configuration["ConnectionStrings:AssignmentsConnection"]);
+            });
+            services.AddRazorPages().AddRazorRuntimeCompilation();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
