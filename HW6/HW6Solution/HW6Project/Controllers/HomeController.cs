@@ -11,12 +11,12 @@ namespace HW6Project.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
-
-        public HomeController(ILogger<HomeController> logger)
+        private ChinookDbContext db;
+        public HomeController(ChinookDbContext db)
         {
-            _logger = logger;
+            this.db = db;
         }
+
 
         public IActionResult Index()
         {
