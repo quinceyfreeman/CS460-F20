@@ -18,7 +18,7 @@ namespace HW6Project.Controllers
             this.db = db;
         }
         [HttpGet]
-        public IActionResult Index(string? artist)
+        public IActionResult Index(string artist)
         {
             ViewBag.returnString = null;
             if(artist == null)
@@ -39,8 +39,8 @@ namespace HW6Project.Controllers
         [HttpGet]
         public IActionResult Artist(int? id)
         {
-            Artist selectedArtist = db.Artists.Include(a => a.Albums).Single(a => a.ArtistId == id);
-            return View(selectedArtist);
+            Artist artist = db.Artists.Include(art => art.Albums).ThenInclude(alb => alb.Tracks).Single(art => art.ArtistId == id);
+            return View(artist);
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

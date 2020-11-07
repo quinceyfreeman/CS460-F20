@@ -2,21 +2,63 @@
 @{
     ViewData["Title"] = "Artist";
 }
-<h1>@Model.Name</h1>
 
+<div class="container">
+    <div class="row mt-5">
+        <div class="col">
+            <h1>@Model.Name</h1>
+            <p>Albums in discography - @Model.Albums.Count()</p>
 
-    <table class="table table-dark">
-    <thead>
-        <tr>
-        <th scope="col">Albums</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (Album album in Model.Albums)
+            @if (Model.Albums.Count() == 0)
+            {
+                <div class="album-card mt-5">
+                    <p>This artist doesn't seem to have any entries to their discography.</p>
+                    <p>Check back soon.</p>
+                </div>
+            }
+            <p>This is where content about the artist could go, but since there is none here is some random text to fill the space.</p>
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quos esse neque dolores labore sapiente architecto voluptatum laborum nobis quam? Voluptates ab laboriosam accusamus hic aspernatur? Nobis commodi harum animi iure.</p>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Veniam odit, eum officia accusamus modi beatae, corrupti vitae ipsam, soluta nihil quam exercitationem aut quae. Velit deleniti quo quam alias tempora?</p>
+        </div>
+        <div class="col-5.5">
+            <img src="https://via.placeholder.com/500C/O https://placeholder.com/" style="border-radius: 20px;"/>
+        </div>
+    </div>
+</div>
+
+@foreach (Album album in Model.Albums)
+{
+    int trackNumber = 0;
+
+    <div class="card mt-5">
+        <h1 class="mb-5">@album.Title</h1>
+
+        <div class="table-responsive">
+        <table class="table">
+        <thead>
+            <tr>                                
+                <th scope="col" style="font-size: 2em;">#</th>
+                <th scope="col" style="font-size: 2em;">Name</th>
+                <th scope="col" style="font-size: 2em;">Duration</th>
+                <th scope="col" style="font-size: 2em;">Price</th>
+            </tr>
+        </thead>
+        <tbody>
+        @foreach (Track track in album.Tracks)
         {
+            TimeSpan convert = TimeSpan.FromMilliseconds(@track.Milliseconds);
+            string duration = $"{(int)convert.TotalMinutes}:{convert.Seconds:00}";
+            trackNumber += 1;
+
             <tr>
-                <td>@album.Title</td>
+                <td>@trackNumber</td>
+                <td>@track.Name</td>
+                <td>@duration</td>
+                <td>@track.UnitPrice</td>
             </tr>
         }
-    </tbody>
-    </table>
+        </tbody>
+        </table>
+        </div>
+    </div>       
+}

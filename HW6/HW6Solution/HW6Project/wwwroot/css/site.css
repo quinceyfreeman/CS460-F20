@@ -18,3 +18,17 @@ nav, .navbar {
   backdrop-filter: saturate(180%) blur(20px);
   border-bottom: 1px solid #000;
 }
+.card {
+  padding: 2.5em;
+  background: rgba(18, 3, 46, 0.8);
+  -webkit-backdrop-filter: saturate(180%) blur(20px);
+  backdrop-filter: saturate(180%) blur(20px);
+  border-radius: 20px;
+}
+.card:last-of-type {
+  margin-bottom: 3em;
+}
+.table, th, td {
+  color: #fff;
+  border: none !important;
+}

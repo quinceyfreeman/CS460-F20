@@ -14,7 +14,7 @@ namespace HW6Project.Models
         public long TrackId { get; set; }
         [Required]
         [Column(TypeName = "NUMERIC(10,2)")]
-        public byte[] UnitPrice { get; set; }
+        public decimal UnitPrice { get; set; }
         public long Quantity { get; set; }
 
         [ForeignKey(nameof(InvoiceId))]

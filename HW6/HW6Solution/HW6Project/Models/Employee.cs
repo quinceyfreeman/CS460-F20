@@ -26,9 +26,9 @@ namespace HW6Project.Models
         public string Title { get; set; }
         public long? ReportsTo { get; set; }
         [Column(TypeName = "DATETIME")]
-        public byte[] BirthDate { get; set; }
+        public DateTime BirthDate { get; set; }
         [Column(TypeName = "DATETIME")]
-        public byte[] HireDate { get; set; }
+        public DateTime HireDate { get; set; }
         [Column(TypeName = "NVARCHAR(70)")]
         public string Address { get; set; }
         [Column(TypeName = "NVARCHAR(40)")]

@@ -20,38 +20,51 @@
             }
         </div>
 </div>
-@if (Model == null && returnString != null)
-{
-    <table class="table table-dark">
-    <thead>
-        <tr>
-        <th scope="col">Results</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-            <td>@returnString</td>
-        </tr>
-    </tbody>
-    </table>
-}
 
+        <div class="d-flex justify-content-center mt-5">
 
-@if (Model != null)
-{
-    <table class="table table-dark">
-    <thead>
-        <tr>
-        <th scope="col">Results</th>
-        </tr>
-    </thead>
-    <tbody>
-            @foreach (Artist artist in Model)
+            @if (Model == null && returnString != null)
             {
-                <tr>
-                    <td class="results-list"><a href="/Home/Artist/@artist.ArtistId">@artist.Name</a></td>
-                </tr>
+                <div class="card">
+                    <table class="table" style="width: auto; border-radius: 10px">
+                        <thead>
+                            <tr>
+                                <td style="text-align: center;">Results</td>
+                            </tr>
+                        </thead>
+                            <tr>
+                                <td>@returnString</td>
+                            </tr>
+                        <tbody>
+                        </tbody>
+                    </table>
+                </div>
             }
-    </tbody>
-    </table>
-}
+            @if (Model != null)
+            {
+                <div class="card">
+                <table class="table" style="width: auto; border-radius: 10px">
+                    <thead>
+                        <tr>
+                            <td style="text-align: center;">Results</td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @if (Model.Count() == 0)
+                        {
+                            <tr>
+                                <td>Sorry, we came up with nothing :(</td>
+                            </tr>
+                        }
+                        @foreach (Artist artist in Model)
+                        {
+                            <tr class="results-list">
+                                <td class="results-list"><a href="/Home/Artist/@artist.ArtistId">@artist.Name</a></td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+                </div>
+            }
+
+        </div>

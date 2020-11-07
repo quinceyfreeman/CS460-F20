@@ -18,7 +18,7 @@ namespace HW6Project.Models
         public long CustomerId { get; set; }
         [Required]
         [Column(TypeName = "DATETIME")]
-        public byte[] InvoiceDate { get; set; }
+        public DateTime InvoiceDate { get; set; }
         [Column(TypeName = "NVARCHAR(70)")]
         public string BillingAddress { get; set; }
         [Column(TypeName = "NVARCHAR(40)")]
@@ -31,7 +31,7 @@ namespace HW6Project.Models
         public string BillingPostalCode { get; set; }
         [Required]
         [Column(TypeName = "NUMERIC(10,2)")]
-        public byte[] Total { get; set; }
+        public decimal Total { get; set; }
 
         [ForeignKey(nameof(CustomerId))]
         [InverseProperty("Invoices")]

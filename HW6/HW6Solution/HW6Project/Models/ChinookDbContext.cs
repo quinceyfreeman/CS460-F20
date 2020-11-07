@@ -42,7 +42,7 @@ namespace HW6Project.Models
                 entity.HasIndex(e => e.ArtistId)
                     .HasName("IFK_AlbumArtistId");
 
-                entity.Property(e => e.AlbumId).ValueGeneratedNever();
+                entity.Property(e => e.AlbumId).ValueGeneratedOnAdd();
 
                 entity.HasOne(d => d.Artist)
                     .WithMany(p => p.Albums)
@@ -52,7 +52,7 @@ namespace HW6Project.Models
 
             modelBuilder.Entity<Artist>(entity =>
             {
-                entity.Property(e => e.ArtistId).ValueGeneratedNever();
+                entity.Property(e => e.ArtistId).ValueGeneratedOnAdd();
             });
 
             modelBuilder.Entity<Customer>(entity =>
@@ -60,7 +60,7 @@ namespace HW6Project.Models
                 entity.HasIndex(e => e.SupportRepId)
                     .HasName("IFK_CustomerSupportRepId");
 
-                entity.Property(e => e.CustomerId).ValueGeneratedNever();
+                entity.Property(e => e.CustomerId).ValueGeneratedOnAdd();
             });
 
             modelBuilder.Entity<Employee>(entity =>
@@ -68,12 +68,12 @@ namespace HW6Project.Models
                 entity.HasIndex(e => e.ReportsTo)
                     .HasName("IFK_EmployeeReportsTo");
 
-                entity.Property(e => e.EmployeeId).ValueGeneratedNever();
+                entity.Property(e => e.EmployeeId).ValueGeneratedOnAdd();
             });
 
             modelBuilder.Entity<Genre>(entity =>
             {
-                entity.Property(e => e.GenreId).ValueGeneratedNever();
+                entity.Property(e => e.GenreId).ValueGeneratedOnAdd();
             });
 
             modelBuilder.Entity<Invoice>(entity =>
@@ -81,7 +81,7 @@ namespace HW6Project.Models
                 entity.HasIndex(e => e.CustomerId)
                     .HasName("IFK_InvoiceCustomerId");
 
-                entity.Property(e => e.InvoiceId).ValueGeneratedNever();
+                entity.Property(e => e.InvoiceId).ValueGeneratedOnAdd();
 
                 entity.HasOne(d => d.Customer)
                     .WithMany(p => p.Invoices)
@@ -97,7 +97,7 @@ namespace HW6Project.Models
                 entity.HasIndex(e => e.TrackId)
                     .HasName("IFK_InvoiceLineTrackId");
 
-                entity.Property(e => e.InvoiceLineId).ValueGeneratedNever();
+                entity.Property(e => e.InvoiceLineId).ValueGeneratedOnAdd();
 
                 entity.HasOne(d => d.Invoice)
                     .WithMany(p => p.InvoiceLines)
@@ -112,12 +112,12 @@ namespace HW6Project.Models
 
             modelBuilder.Entity<MediaType>(entity =>
             {
-                entity.Property(e => e.MediaTypeId).ValueGeneratedNever();
+                entity.Property(e => e.MediaTypeId).ValueGeneratedOnAdd();
             });
 
             modelBuilder.Entity<Playlist>(entity =>
             {
-                entity.Property(e => e.PlaylistId).ValueGeneratedNever();
+                entity.Property(e => e.PlaylistId).ValueGeneratedOnAdd();
             });
 
             modelBuilder.Entity<PlaylistTrack>(entity =>
@@ -149,7 +149,7 @@ namespace HW6Project.Models
                 entity.HasIndex(e => e.MediaTypeId)
                     .HasName("IFK_TrackMediaTypeId");
 
-                entity.Property(e => e.TrackId).ValueGeneratedNever();
+                entity.Property(e => e.TrackId).ValueGeneratedOnAdd();
 
                 entity.HasOne(d => d.MediaType)
                     .WithMany(p => p.Tracks)
