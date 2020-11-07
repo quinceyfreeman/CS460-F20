@@ -1,5 +1,7 @@
-﻿@{
+﻿@model IQueryable<Artist>;
+@{
     ViewData["Title"] = "Home Page";
+    var returnString = ViewBag.returnString;
 }
 <div class="container">
         <div class="text-center">
@@ -18,3 +20,38 @@
             }
         </div>
 </div>
+@if (Model == null && returnString != null)
+{
+    <table class="table table-dark">
+    <thead>
+        <tr>
+        <th scope="col">Results</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>@returnString</td>
+        </tr>
+    </tbody>
+    </table>
+}
+
+
+@if (Model != null)
+{
+    <table class="table table-dark">
+    <thead>
+        <tr>
+        <th scope="col">Results</th>
+        </tr>
+    </thead>
+    <tbody>
+            @foreach (Artist artist in Model)
+            {
+                <tr>
+                    <td class="results-list"><a href="/Home/Artist/@artist.ArtistId">@artist.Name</a></td>
+                </tr>
+            }
+    </tbody>
+    </table>
+}

@@ -1,0 +1,22 @@
+@model HW6Project.Models.Artist;
+@{
+    ViewData["Title"] = "Artist";
+}
+<h1>@Model.Name</h1>
+
+
+    <table class="table table-dark">
+    <thead>
+        <tr>
+        <th scope="col">Albums</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (Album album in Model.Albums)
+        {
+            <tr>
+                <td>@album.Title</td>
+            </tr>
+        }
+    </tbody>
+    </table>

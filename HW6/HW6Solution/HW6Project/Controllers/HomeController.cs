@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using HW6Project.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace HW6Project.Controllers
 {
@@ -16,16 +17,30 @@ namespace HW6Project.Controllers
         {
             this.db = db;
         }
-
-
-        public IActionResult Index()
+        [HttpGet]
+        public IActionResult Index(string? artist)
         {
-            return View();
+            ViewBag.returnString = null;
+            if(artist == null)
+            {
+                return View();
+            }
+            else if(artist.Length < 3)
+            {
+                ViewBag.returnString = "Please enter more than two characters";
+                return View();
+            }
+            else
+            {
+                IQueryable<Artist> queryResults = db.Artists.Where(a => a.Name.ToLower().Contains(artist.ToLower()));
+                return View(queryResults);
+            }
         }
-
-        public IActionResult Privacy()
+        [HttpGet]
+        public IActionResult Artist(int? id)
         {
-            return View();
+            Artist selectedArtist = db.Artists.Include(a => a.Albums).Single(a => a.ArtistId == id);
+            return View(selectedArtist);
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
