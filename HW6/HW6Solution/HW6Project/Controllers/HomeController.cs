@@ -6,26 +6,41 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using HW6Project.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace HW6Project.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
-
-        public HomeController(ILogger<HomeController> logger)
+        private ChinookDbContext db;
+        public HomeController(ChinookDbContext db)
         {
-            _logger = logger;
+            this.db = db;
         }
-
-        public IActionResult Index()
+        [HttpGet]
+        public IActionResult Index(string artist)
         {
-            return View();
+            ViewBag.returnString = null;
+            if(artist == null)
+            {
+                return View();
+            }
+            else if(artist.Length < 3)
+            {
+                ViewBag.returnString = "Please enter more than two characters";
+                return View();
+            }
+            else
+            {
+                IQueryable<Artist> queryResults = db.Artists.Where(a => a.Name.ToLower().Contains(artist.ToLower()));
+                return View(queryResults);
+            }
         }
-
-        public IActionResult Privacy()
+        [HttpGet]
+        public IActionResult Artist(int? id)
         {
-            return View();
+            Artist artist = db.Artists.Include(art => art.Albums).ThenInclude(alb => alb.Tracks).ThenInclude(g => g.Genre).Single(art => art.ArtistId == id);
+            return View(artist);
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
