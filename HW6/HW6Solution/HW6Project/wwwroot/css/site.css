@@ -32,3 +32,37 @@ nav, .navbar {
   color: #fff;
   border: none !important;
 }
+.results-list {
+  text-align: center !important;
+  border: 1px solid rgba(73, 24, 179, 0.8);
+  border-left: none;
+  border-right: none;
+  border-bottom: none;
+}
+.Title {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.genre-icon{
+  align-self: center;
+  height: 50px;
+  width: 50px;
+  filter: invert(50%) sepia(100%) saturate(100%) hue-rotate(1000deg) brightness(200%) contrast(100%);
+}
+.album-name {
+  display: table-cell;
+  vertical-align: middle;
+  align-self: center;
+  /* padding: 1em; */
+  top: 50%;
+}
+.genre {
+  display: table-cell;
+  vertical-align: middle;
+  align-self: center;
+  /* padding: 1em; */
+}
+.genre-name {
+  text-align: center;
+}

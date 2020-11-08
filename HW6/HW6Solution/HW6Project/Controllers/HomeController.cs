@@ -39,7 +39,7 @@ namespace HW6Project.Controllers
         [HttpGet]
         public IActionResult Artist(int? id)
         {
-            Artist artist = db.Artists.Include(art => art.Albums).ThenInclude(alb => alb.Tracks).Single(art => art.ArtistId == id);
+            Artist artist = db.Artists.Include(art => art.Albums).ThenInclude(alb => alb.Tracks).ThenInclude(g => g.Genre).Single(art => art.ArtistId == id);
             return View(artist);
         }
 

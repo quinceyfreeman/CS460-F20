@@ -1,6 +1,6 @@
 @model HW6Project.Models.Artist;
 @{
-    ViewData["Title"] = "Artist";
+    ViewData["Title"] = "Artist - " + @Model.Name;
 }
 
 <div class="container">
@@ -11,14 +11,17 @@
 
             @if (Model.Albums.Count() == 0)
             {
-                <div class="album-card mt-5">
+                <div class="card mt-5">
                     <p>This artist doesn't seem to have any entries to their discography.</p>
                     <p>Check back soon.</p>
                 </div>
             }
+            else
+            {
             <p>This is where content about the artist could go, but since there is none here is some random text to fill the space.</p>
             <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quos esse neque dolores labore sapiente architecto voluptatum laborum nobis quam? Voluptates ab laboriosam accusamus hic aspernatur? Nobis commodi harum animi iure.</p>
             <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Veniam odit, eum officia accusamus modi beatae, corrupti vitae ipsam, soluta nihil quam exercitationem aut quae. Velit deleniti quo quam alias tempora?</p>
+            }
         </div>
         <div class="col-5.5">
             <img src="https://via.placeholder.com/500C/O https://placeholder.com/" style="border-radius: 20px;"/>
@@ -29,9 +32,20 @@
 @foreach (Album album in Model.Albums)
 {
     int trackNumber = 0;
+    @* two ways that it returns the genre name: take tracks from album, order with most genre at top *@
+    string listofTracks = album.Tracks.OrderByDescending(i => i.Genre.Name.Count()).GroupBy(i => i.Genre.Name).ElementAt(0).Key;
+    string genreName = album.Tracks.OrderByDescending(i => i.Genre.Name.Count()).First().Genre.Name;
+
+    string genreIcon = album.Tracks.OrderByDescending(i => i.Genre.Name.Count()).First().Genre.GenreId.ToString() + ".svg";
 
     <div class="card mt-5">
-        <h1 class="mb-5">@album.Title</h1>
+        <div class="Title">
+            <h1 class="album-name mb-5">@album.Title</h1>
+            <div class="genre">
+                <img class="genre-icon" src="/images/icons/@genreIcon" alt="Genre icon for album" />
+                <p class="genre-name">@genreName</p>
+            </div>
+        </div>
 
         <div class="table-responsive">
         <table class="table">
