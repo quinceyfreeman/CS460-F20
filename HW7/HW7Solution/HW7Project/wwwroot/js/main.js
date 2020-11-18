@@ -13,6 +13,7 @@ function sendRequest(username, reponame) {
 function displayCommits(data) {
     $("#commits").empty();
 
+    $("#commits").append("<h3>Commits<small class='text-muted'></small></h3>")
     $("#commits").append("<div class='table-responsive mt-5'><table class='table table-dark'><thead><tr><th scope='col'>SHA</th><th scope='col'>Timestamp</th><th scope='col'>Committer</th><th scope='col'>Commit Message</th></tr></thead><tbody id='table-body'>");
     $.each(data, function(key, value) {
         var row = '';
