@@ -33,8 +33,14 @@ namespace HW7Project.Controllers
         }
         public IActionResult Index()
         {
+            var model = new ViewModel();
+            GitAPI user = new GitAPI("https://api.github.com/user",_config["AJAX:GitToken"], "quinceyfreeman");
+            GitAPI repos = new GitAPI("https://api.github.com/user/repos",_config["AJAX:GitToken"], "quinceyfreeman");
+
+            model.UserData = user.getUserData();
+            model.Repositories = repos.getUserRepos();
             
-            return View();
+            return View(model);
         }
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
