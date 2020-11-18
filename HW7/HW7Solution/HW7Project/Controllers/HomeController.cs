@@ -14,16 +14,22 @@ namespace HW7Project.Controllers
     {
         private readonly ILogger<HomeController> _logger;
         private readonly IConfiguration _config;
+        public HomeController(ILogger<HomeController> logger, IConfiguration config)
+        {
+            _logger = logger;
+            _config = config;
+        }
         public IActionResult GitUser()
         {
             GitAPI user = new GitAPI("https://api.github.com/user",_config["AJAX:GitToken"], "quinceyfreeman");
             User data = user.getUserData();
             return Json(data);
         }
-        public HomeController(ILogger<HomeController> logger, IConfiguration config)
+        public IActionResult GitRepositories()
         {
-            _logger = logger;
-            _config = config;
+            GitAPI repos = new GitAPI("https://api.github.com/user/repos",_config["AJAX:GitToken"], "quinceyfreeman");
+            IEnumerable<Repository> repositories = repos.getUserRepos();
+            return Json(repositories);
         }
         public IActionResult Index()
         {

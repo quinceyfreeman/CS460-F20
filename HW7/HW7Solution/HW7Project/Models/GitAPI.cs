@@ -35,6 +35,24 @@ namespace HW7Project.Models
 
             return user;
         }
+        public IEnumerable<Repository> getUserRepos()
+        {
+            string json = SendRequest(Source, GitToken, Username);
+            JToken data = JToken.Parse(json);
+            List<Repository> output = new List<Repository>();
+            int count = data.Count();
+            for (int i = 0; i < count; i++)
+            {
+                output.Add(new Repository { Name = (string)data[i]["name"],
+                                            Owner = (string)data[i]["owner"]["login"],
+                                            HtmlURL = (string)data[i]["html_url"],
+                                            FullName = (string)data[i]["full_name"],
+                                            OwnerAvatarURL = (string)data[i]["owner"]["avatar_url"],
+                                            LastUpdated = (DateTime)data[i]["pushed_at"]});
+            }
+
+            return output;
+        }
 
         private static string SendRequest(string uri, string credentials, string username)
         {

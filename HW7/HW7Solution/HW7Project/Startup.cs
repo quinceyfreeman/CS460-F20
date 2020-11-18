@@ -50,6 +50,10 @@ namespace HW7Project
                     pattern: "api/user",
                     defaults: new {controller="Home", action="GitUser"});
                 endpoints.MapControllerRoute(
+                    name: "Git Repositories API",
+                    pattern: "api/repositories",
+                    defaults: new {controller="Home", action="GitRepositories"});
+                endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
             });
