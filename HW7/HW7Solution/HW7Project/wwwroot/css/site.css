@@ -10,7 +10,7 @@
 .User {
   display: flex;
   width: auto;
-  padding: 2em;
+  padding: 1.5em;
   background-color: #4d378f;
   border-radius: 20px;
 }
@@ -27,4 +27,8 @@
 }
 .repo-links, .repo-links:hover {
   text-decoration: none;
+}
+#commits {
+  width: 100%;
+  margin: 0 auto;
 }

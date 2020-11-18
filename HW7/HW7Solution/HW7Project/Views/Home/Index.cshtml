@@ -3,25 +3,27 @@
     ViewData["Title"] = "Home Page";
 }
 
-<div class="row">
-    <div class="center">
-        <div class="User">
-            <img class="userAvatar" src='@Model.UserData.AvatarURL' />
-            <div class="contact">
-                <h1>@Model.UserData.Name</h1>
-                <p>@Model.UserData.Username</p>
-                <p><small class='text-muted'>@Model.UserData.Email</small></p>
-                <p><small class='text-muted'>@Model.UserData.Company</small></p>
-                <p><small class='text-muted'>@Model.UserData.Location</small></p>
-            </div>
-            <div class="link">
-                <a href='@Model.UserData.HtmlURL'>
-                    Visit GitHub Profile
-                    <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-link-45deg" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M4.715 6.542L3.343 7.914a3 3 0 1 0 4.243 4.243l1.828-1.829A3 3 0 0 0 8.586 5.5L8 6.086a1.001 1.001 0 0 0-.154.199 2 2 0 0 1 .861 3.337L6.88 11.45a2 2 0 1 1-2.83-2.83l.793-.792a4.018 4.018 0 0 1-.128-1.287z"/>
-                    <path d="M6.586 4.672A3 3 0 0 0 7.414 9.5l.775-.776a2 2 0 0 1-.896-3.346L9.12 3.55a2 2 0 0 1 2.83 2.83l-.793.792c.112.42.155.855.128 1.287l1.372-1.372a3 3 0 0 0-4.243-4.243L6.586 4.672z"/>
-                    </svg>
-                </a>
+<div class="container">
+    <div class="row">
+        <div class="center">
+            <div class="User">
+                <img class="userAvatar" src='@Model.UserData.AvatarURL' />
+                <div class="contact">
+                    <h1>@Model.UserData.Name</h1>
+                    <p>@Model.UserData.Username</p>
+                    <p><small class='text-muted'>@Model.UserData.Email</small></p>
+                    <p><small class='text-muted'>@Model.UserData.Company</small></p>
+                    <p><small class='text-muted'>@Model.UserData.Location</small></p>
+                </div>
+                <div class="link">
+                    <a href='@Model.UserData.HtmlURL'>
+                        Visit GitHub Profile
+                        <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-link-45deg" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M4.715 6.542L3.343 7.914a3 3 0 1 0 4.243 4.243l1.828-1.829A3 3 0 0 0 8.586 5.5L8 6.086a1.001 1.001 0 0 0-.154.199 2 2 0 0 1 .861 3.337L6.88 11.45a2 2 0 1 1-2.83-2.83l.793-.792a4.018 4.018 0 0 1-.128-1.287z"/>
+                        <path d="M6.586 4.672A3 3 0 0 0 7.414 9.5l.775-.776a2 2 0 0 1-.896-3.346L9.12 3.55a2 2 0 0 1 2.83 2.83l-.793.792c.112.42.155.855.128 1.287l1.372-1.372a3 3 0 0 0-4.243-4.243L6.586 4.672z"/>
+                        </svg>
+                    </a>
+                </div>
             </div>
         </div>
     </div>
@@ -37,10 +39,22 @@
                     <div class="card-body">
                         <h5 class="card-title">@repository.Owner</h5>
                         <p class="card-text"><small class="text-muted">Last updated on @repository.LastUpdated.ToString("d")</small></p>
-                        <button type="button" class="btn btn-dark">View Commits for Repository</button>
+                        <button type="button" class="btn btn-dark" onclick="sendRequest('@repository.Owner','@repository.Name')">View Commits for Repository</button>
                     </div>
                 </div>
             </div>
         }
     </div>
 </div>
+
+<div class="container-fluid">
+    <div class="row">
+        <div id="commits">
+
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script type="text/javascript" src="~/js/main.js"></script>
+}

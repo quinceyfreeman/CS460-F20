@@ -53,6 +53,23 @@ namespace HW7Project.Models
 
             return output;
         }
+        public IEnumerable<Commit> getCommits()
+        {
+            string json = SendRequest(Source, GitToken, Username);
+            JToken data = JToken.Parse(json);
+            List<Commit> output = new List<Commit>();
+            int count = data.Count();
+            for (int i = 0; i < count; i++)
+            {
+                output.Add(new Commit { Sha = (string)data[i]["sha"],
+                                        Committer = (string)data[i]["commit"]["committer"]["name"],
+                                        WhenCommitted = (DateTime)data[i]["commit"]["committer"]["date"],
+                                        CommitMessage = (string)data[i]["commit"]["message"],
+                                        HtmlURL = (string)data[i]["html_url"]});
+            }
+
+            return output;
+        }
 
         private static string SendRequest(string uri, string credentials, string username)
         {

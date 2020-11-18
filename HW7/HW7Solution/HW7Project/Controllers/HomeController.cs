@@ -31,6 +31,13 @@ namespace HW7Project.Controllers
             IEnumerable<Repository> repositories = repos.getUserRepos();
             return Json(repositories);
         }
+        public IActionResult GitCommits(string user, string repo)
+        {
+            string url = "https://api.github.com/repos/" + user + "/" + repo + "/commits";
+            GitAPI repos = new GitAPI(url,_config["AJAX:GitToken"], "quinceyfreeman");
+            IEnumerable<Commit> commits = repos.getCommits();
+            return Json(commits);
+        }
         public IActionResult Index()
         {
             var model = new ViewModel();
