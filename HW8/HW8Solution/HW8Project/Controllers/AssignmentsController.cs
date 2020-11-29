@@ -185,5 +185,25 @@ namespace HW8Project.Controllers
 
             return RedirectToAction("Index");
         }
+        public IActionResult AddTag(string tags)
+        {
+            if (ModelState.IsValid)
+            {
+                if (tags != null)
+                {
+                string[] words = tags.Split(", ", System.StringSplitOptions.RemoveEmptyEntries);
+
+                foreach (var word in words)
+                {
+                    Tag newTag = new Tag {Name = word};
+                    _context.Add(newTag);
+                    _context.SaveChanges();
+                }
+                // _context.SaveChanges();
+                }
+                // return RedirectToAction("Add", "Assignments");
+            }
+            return View();
+        }
     }
 }

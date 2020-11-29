@@ -18,7 +18,7 @@ namespace HW8Project.Models
         [Key]
         [Column("ID")]
         public int Id { get; set; }
-        [StringLength(10)]
+        [StringLength(50)]
         public string Name { get; set; }
 
         [InverseProperty(nameof(AssignmentTag.Tag))]

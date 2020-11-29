@@ -15,7 +15,7 @@
             <div class="form-group">
                 <label asp-for="@Model.SelectedTags" class="control-label"> Tags</label>
                 @Html.ListBoxFor(m => m.SelectedTags, new MultiSelectList(@Model.Tags, "Id", "Name", @Model.SelectedTags), new {@class = "form-control", @id = "mySelect"})
-                <small class="form-text text-muted">Don't see a relavent tag? Add more <a style="color: blue; text-decoration: underline;" data-toggle="modal" data-target="#exampleModal">here</a></small>
+                <small class="form-text text-muted">Don't see a relavent tag? Add more <a class="addTag" style="color: blue; text-decoration: underline;" data-toggle="modal" data-target="#exampleModal">here</a></small>
             </div>
             <div class="form-group">
                 <label asp-for="@Model.Assignment.ClassId" class="control-label"> Class</label>
@@ -48,7 +48,7 @@
                 <span asp-validation-for="@Model.Assignment.Notes" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <input type="submit" value="Add" class="btn btn-dark" />
+                <input type="submit" value="Add" class="btn btn-primary" />
             </div>
         </form>
     </div>
@@ -63,6 +63,31 @@
         <p><strong>Title</strong> -- maybe "Homework #1: HTML and CSS"</p>
         <p><strong>Notes</strong> -- remind yourself what needs to be done or what's important to complete it; or just whatever you want to say about the assignment</p>
     </div>
+</div>
+
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Create New Tags</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form asp-action="AddTag" method="POST">
+          <div class="form-group">
+            <label for="textbox" class="col-form-label">Seperate each tag with a comma if adding multiple.</label>
+            <textarea class="form-control" id="textBox"></textarea>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="submit" value="AddTag" class="btn btn-primary" id="AddTag">Add Tags</button>
+      </div>
+    </div>
+  </div>
 </div>
 
 
