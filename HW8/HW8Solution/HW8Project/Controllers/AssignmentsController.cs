@@ -176,5 +176,14 @@ namespace HW8Project.Controllers
         {
             return _context.Assignments.Any(e => e.Id == id);
         }
+        public IActionResult Complete(int? id)
+        {
+            var assignmentUpdate = _context.Assignments.Find(id);
+            assignmentUpdate.IsComplete = true;
+            TryUpdateModelAsync(assignmentUpdate);
+            _context.SaveChanges();
+
+            return RedirectToAction("Index");
+        }
     }
 }

@@ -6,11 +6,14 @@
 }
 
 <h1 class="mb-5">@ClassName Assignments</h1>
+<h4>Upcoming</h4>
 <div class="row d-flex justify-content-center">
 
 
         @foreach (Assignment a in Model)
         {
+            @if (!a.IsComplete)
+            {
             <div class="assignment-card">
                 <h4>@a.Title</h4>
                 <p>Priority: @a.Priority</p>
@@ -24,5 +27,29 @@
                     }
                 </h5>
             </div> 
+            }
         }
+</div>
+<h4>Completed</h4>
+<div class="row d-flex justify-content-center">
+
+        @foreach (Assignment a in Model)
+        {
+            @if (a.IsComplete)
+            {
+                <div class="assignment-card">
+                    <h4>@a.Title</h4>
+                    <p>Priority: @a.Priority</p>
+                    <p>Due: @a.DueDate</p>
+                    <p>Notes: @a.Notes</p>
+
+                    <h5 style="display: inline;">Tags:
+                    @foreach (AssignmentTag t in a.AssignmentTags)
+                    {
+                        <span class="badge badge-primary">@t.Tag.Name</span>
+                    }
+                    </h5>
+                </div>  
+            }
+        }   
 </div>

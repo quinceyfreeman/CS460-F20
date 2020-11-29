@@ -31,7 +31,7 @@ namespace HW8Project.Models
         public string Notes { get; set; }
         [Required]
         [Column("isComplete")]
-        public bool? IsComplete { get; set; }
+        public bool IsComplete { get; set; }
 
         [ForeignKey(nameof(ClassId))]
         [InverseProperty("Assignments")]

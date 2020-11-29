@@ -82,6 +82,20 @@ body {
   border-radius: 20px;
   color: white !important;
 }
+.assignment-table {
+  width: 100%;
+  padding: 2.5em;
+  margin: 1em;
+  background: rgba(18, 3, 46, 0.8);
+  -webkit-backdrop-filter: saturate(180%) blur(20px);
+  backdrop-filter: saturate(180%) blur(20px);
+  border-radius: 20px;
+  color: white !important;
+}
 .assignment-card:last-of-type {
   margin-bottom: 3em;
+}
+.assignments-table, th, td {
+  color: #c5c5c5;
+  border: none !important;
 }
