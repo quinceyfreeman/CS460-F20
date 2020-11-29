@@ -19,10 +19,13 @@ namespace HW8Project.Controllers
         }
 
         // GET: Assignments
-        public async Task<IActionResult> Index()
+        public IActionResult Index()
         {
-            var assignmentDbContext = _context.Assignments.Include(a => a.Class);
-            return View(await assignmentDbContext.ToListAsync());
+            var assignmentDbContext = _context.Assignments.Include(at => at.AssignmentTags)
+                                                 .ThenInclude(t => t.Tag)
+                                                 .Include(c => c.Class);
+
+            return View(assignmentDbContext);
         }
 
         // GET: Assignments/Details/5
@@ -47,25 +50,43 @@ namespace HW8Project.Controllers
         // GET: Assignments/Create
         public IActionResult Create()
         {
-            ViewData["ClassId"] = new SelectList(_context.Classes, "Id", "Id");
-            return View();
+            ViewData["ClassName"] = new SelectList(_context.Classes, "Id", "Name");
+            ViewData["Tag"] = new SelectList(_context.Tags, "Id", "Name");
+
+            ViewModel assign = new ViewModel();
+            assign.Classes = _context.Classes;
+            assign.Tags = _context.Tags;
+
+            return View(assign);
         }
 
         // POST: Assignments/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,ClassId,Priority,DueDate,Title,Notes,IsComplete")] Assignment assignment)
+        public IActionResult Add(ViewModel assign)
         {
-            if (ModelState.IsValid)
+
+            Assignment assignment = assign.Assignment;
+
+            if(assign.SelectedTags != null)
             {
-                _context.Add(assignment);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                int id = assign.SelectedTags.ElementAt(0);
+
+                for(int i = 0; i < assign.SelectedTags.Count(); i++)
+                {
+                    AssignmentTag assignmentTag = new AssignmentTag {Assignment = assignment,
+                                                                    AssignmentId = assign.Assignment.Id,
+                                                                    Tag = _context.Tags.Single(n => n.Id == assign.SelectedTags.ElementAt(i)),
+                                                                    TagId = assign.SelectedTags.ElementAt(i)};
+                    _context.AssignmentTags.Add(assignmentTag);
+                }
             }
-            ViewData["ClassId"] = new SelectList(_context.Classes, "Id", "Id", assignment.ClassId);
-            return View(assignment);
+
+            _context.Add(assignment);
+            _context.SaveChanges();
+
+            return RedirectToAction("Index");
         }
 
         // GET: Assignments/Edit/5

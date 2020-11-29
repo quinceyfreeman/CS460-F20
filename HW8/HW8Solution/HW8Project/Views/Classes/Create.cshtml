@@ -1,32 +1,33 @@
-@model HW8Project.Models.Class
+@model string
 
 @{
     ViewData["Title"] = "Create";
 }
 
-<h1>Create</h1>
+<h1>Add Classes</h1>
 
-<h4>Class</h4>
+<h4>Here is where we can add classes that you are currently enrolled in.</h4>
+<p>You can add multiple classes by seperating each course name by a comma.</p>
+<small class="form-text text-muted">e.g. (MTH111, CS242, ATH123)</small>
+
 <hr />
-<div class="row">
-    <div class="col-md-4">
+<div class="row text-center">
+    <div class="col mt-5">
         <form asp-action="Create">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
-                <label asp-for="Name" class="control-label"></label>
-                <input asp-for="Name" class="form-control" />
-                <span asp-validation-for="Name" class="text-danger"></span>
+                <label name="classes" class="control-label">Course Names</label>
+                <input name="classes" class="form-control" />
             </div>
             <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
+                <input type="submit" value="Create" class="btn btn-dark"/>
             </div>
         </form>
+        <p>Don't need to add any courses?</p>
+        <a class="btn btn-dark" asp-controller="Assignments" asp-action="Create">Add Assignments</a>
+
     </div>
 </div>
 
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}

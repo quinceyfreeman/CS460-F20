@@ -15,6 +15,11 @@ namespace HW8Project.Models
         {
             Assignments = new HashSet<Assignment>();
         }
+        public Class(string name)
+        {
+            Name = name;
+            Assignments = new HashSet<Assignment>();
+        }
 
         [Key]
         [Column("ID")]

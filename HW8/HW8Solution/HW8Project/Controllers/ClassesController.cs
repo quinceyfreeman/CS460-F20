@@ -53,15 +53,22 @@ namespace HW8Project.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Name")] Class @class)
+        public async Task<IActionResult> Create(string classes)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(@class);
+                char[] delimiterChars = { ' ', ','};
+                string[] words = classes.Split(delimiterChars, System.StringSplitOptions.RemoveEmptyEntries);
+
+                foreach (var word in words)
+                {
+                    Class newClass = new Class(word);
+                    _context.Add(newClass);
+                }
                 await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction("Added");
             }
-            return View(@class);
+            return View();
         }
 
         // GET: Classes/Edit/5
@@ -147,6 +154,22 @@ namespace HW8Project.Controllers
         private bool ClassExists(int id)
         {
             return _context.Classes.Any(e => e.Id == id);
+        }
+
+        public IActionResult Added()
+        {
+            return View();
+        }
+        public IActionResult Class(int id)
+        {
+            var assignment = _context.Assignments.Include(at => at.AssignmentTags)
+                                                 .ThenInclude(t => t.Tag)
+                                                 .Include(c => c.Class)
+                                                 .Where(c => c.ClassId == id)
+                                                 .OrderBy(p => p.Priority)
+                                                 .ThenBy(d => d.DueDate);
+
+            return View(assignment);
         }
     }
 }
