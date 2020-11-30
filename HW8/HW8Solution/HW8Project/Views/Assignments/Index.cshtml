@@ -1,0 +1,67 @@
+@model IEnumerable<HW8Project.Models.Assignment>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>View Assignments</h1>
+
+<div class="row text-center mb-5">
+    <div class="col">
+        <h6>Assignments For:</h6>
+        @foreach (var c in Model.GroupBy(c => c.ClassId))
+        {
+            int classId = @c.Select(c => c.Class.Id).FirstOrDefault();
+            string className = @c.Select(c => c.Class.Name).FirstOrDefault();
+            <a class="btn btn-dark" href="/Classes/Class/@classId">@className</a>
+        }
+    </div>
+</div>
+
+<div class="assignment-table mt-5">
+    <div class="table-responsive">
+        <table class="table">
+        <thead>
+            <tr>                                
+                <th scope="col" style="font-size: 2em;">Priority</th>
+                <th scope="col" style="font-size: 2em;">Due</th>
+                <th scope="col" style="font-size: 2em;">Title</th>
+                <th scope="col" style="font-size: 2em;">Notes</th>
+                <th scope="col" style="font-size: 2em;">Class</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+        @foreach (var item in Model) {
+            @if (!item.IsComplete)
+            {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Priority)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DueDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Title)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Notes)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Class.Name)
+                </td>
+                <td>
+                    <a asp-action="Complete" asp-route-id="@item.Id">
+                        <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-check-square-fill" fill="white" xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="evenodd" d="M2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2zm10.03 4.97a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z"/>
+                        </svg>
+                    </a> 
+                </td>
+            </tr>
+            }
+        }
+        </tbody>
+        </table>
+    </div>
+</div>  

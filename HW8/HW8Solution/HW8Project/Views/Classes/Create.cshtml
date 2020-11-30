@@ -1,0 +1,34 @@
+@model string
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Add Classes</h1>
+
+<h4>Here is where we can add classes that you are currently enrolled in.</h4>
+<p>You can add multiple classes by seperating each course name by a comma.</p>
+<small class="form-text text-muted">e.g. (MTH111, CS242, ATH123)</small>
+
+<hr />
+<div class="row text-center">
+    <div class="col mt-5">
+        <form asp-action="Create">
+            <div class="form-group">
+                <label name="classes" class="control-label">Course Names</label>
+                <input name="classes" class="form-control" />
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-dark"/>
+            </div>
+        </form>
+        <p>Don't need to add any courses?</p>
+        <a class="btn btn-dark" asp-controller="Assignments" asp-action="Create">Add Assignments</a>
+
+    </div>
+</div>
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
