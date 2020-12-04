@@ -1,0 +1,96 @@
+@model HW8Project.Models.ViewModel
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Add Assignment</h1>
+
+<h4>Enter your assignment information below</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Add">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="@Model.SelectedTags" class="control-label"> Tags</label>
+                @Html.ListBoxFor(m => m.SelectedTags, new MultiSelectList(@Model.Tags, "Id", "Name", @Model.SelectedTags), new {@class = "form-control", @id = "mySelect"})
+                <small class="form-text text-muted">Don't see a relavent tag? Add more <a class="addTag" style="color: blue; text-decoration: underline;" data-toggle="modal" data-target="#exampleModal">here</a></small>
+            </div>
+            <div class="form-group">
+                <label asp-for="@Model.Assignment.ClassId" class="control-label"> Class</label>
+                <select asp-for="@Model.Assignment.ClassId" class ="form-control" asp-items="ViewBag.ClassName">
+                </select>
+            </div>
+            <div class="form-group">
+                <label asp-for="@Model.Assignment.Priority" class="control-label"> Priority</label>
+                <select asp-for="@Model.Assignment.Priority" class="form-control">
+                    <option selected>Choose</option>
+                    <option value="1">High</option>
+                    <option value="2">Medium</option>
+                    <option value="3">Low</option>
+                </select>
+                <span asp-validation-for="@Model.Assignment.Priority" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="@Model.Assignment.DueDate" class="control-label"> Due Date</label>
+                <input asp-for="@Model.Assignment.DueDate" class="form-control" />
+                <span asp-validation-for="@Model.Assignment.DueDate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="@Model.Assignment.Title" class="control-label"> Title</label>
+                <input asp-for="@Model.Assignment.Title" class="form-control" />
+                <span asp-validation-for="@Model.Assignment.Title" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="@Model.Assignment.Notes" class="control-label"> Notes</label>
+                <input asp-for="@Model.Assignment.Notes" class="form-control" />
+                <span asp-validation-for="@Model.Assignment.Notes" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Add" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+    <div class="col-md-8">
+        <h3>Got a new Homework Assignment?</h3>
+        <p>Use this page to enter information about your assignment. Add it and then we'll keep track of it for you. We'll let you see your assignments by priority or due date so you'll never miss getting something done!</p>
+        <p>Here's what each part means:</p>
+        <p><strong>Tagging (NEW)</strong> -- You can now tags assignments with 0, 1 or more different tags to glance at assignments characteristics</p>
+        <p><strong>Priority</strong> -- 1 is the highest priority</p>
+        <p><strong>Due</strong> -- due date and time (use Chrome to see a nice date/time chooser!)</p>
+        <p><strong>Course</strong> -- enter it like this: CS 460, WR 355, ... and we can keep assignments for each department and course number</p>
+        <p><strong>Title</strong> -- maybe "Homework #1: HTML and CSS"</p>
+        <p><strong>Notes</strong> -- remind yourself what needs to be done or what's important to complete it; or just whatever you want to say about the assignment</p>
+    </div>
+</div>
+
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Create New Tags</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form asp-action="AddTag" method="POST">
+          <div class="form-group">
+            <label for="textbox" class="col-form-label">Seperate each tag with a comma if adding multiple.</label>
+            <textarea class="form-control" id="textBox"></textarea>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="submit" value="AddTag" class="btn btn-primary" id="AddTag">Add Tags</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

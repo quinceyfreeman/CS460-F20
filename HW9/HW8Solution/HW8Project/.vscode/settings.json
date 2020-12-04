@@ -1,0 +1,4 @@
+{
+    "appService.defaultWebAppToDeploy": "/subscriptions/72fe7577-7607-43b2-8fd4-a85b8d5eca55/resourceGroups/CS460_2020/providers/Microsoft.Web/sites/track-assignments",
+    "appService.deploySubpath": "publish"
+}
