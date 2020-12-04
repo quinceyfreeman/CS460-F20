@@ -9,6 +9,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.EntityFrameworkCore;
 using HW8Project.Models;
+using Microsoft.Data.SqlClient;
 
 namespace HW8Project
 {
@@ -24,9 +25,14 @@ namespace HW8Project
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            // var builder = new SqlConnectionStringBuilder(Configuration.GetConnectionString("HW8Azure"));
+            // builder.Password = Configuration["HW8:DBPassword"];
+
             services.AddControllersWithViews();
             services.AddDbContext<AssignmentDbContext>(opts => {
-                opts.UseSqlServer(Configuration["ConnectionStrings:Default"]);
+                //opts.UseSqlServer(Configuration["ConnectionStrings:Default"]);
+                // opts.UseSqlServer(builder.ConnectionString);
+                opts.UseSqlServer(Configuration.GetConnectionString("HW8Azure"));
             });
             services.AddRazorPages().AddRazorRuntimeCompilation();
         }
