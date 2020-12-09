@@ -21,7 +21,7 @@ namespace Expeditions.Controllers
         // GET: Expedition
         public async Task<IActionResult> Index()
         {
-            var expeditionDbContext = _context.Expeditions.Include(e => e.Peak).Include(e => e.TrekkingAgency);
+            var expeditionDbContext = _context.Expeditions.Include(e => e.Peak).Include(e => e.TrekkingAgency).OrderByDescending(d => d.StartDate).Take(50);
             return View(await expeditionDbContext.ToListAsync());
         }
 
@@ -49,7 +49,7 @@ namespace Expeditions.Controllers
         public IActionResult Create()
         {
             ViewData["PeakId"] = new SelectList(_context.Peaks, "Id", "Name");
-            ViewData["TrekkingAgencyId"] = new SelectList(_context.TrekkingAgencies, "Id", "Id");
+            ViewData["TrekkingAgencyId"] = new SelectList(_context.TrekkingAgencies, "Id", "Name");
             return View();
         }
 
@@ -160,6 +160,41 @@ namespace Expeditions.Controllers
         private bool ExpeditionExists(int id)
         {
             return _context.Expeditions.Any(e => e.Id == id);
+        }
+        public IActionResult NewExpedition()
+        {
+            ViewData["PeakId"] = new SelectList(_context.Peaks, "Id", "Name");
+            ViewData["TrekkingAgencyId"] = new SelectList(_context.TrekkingAgencies, "Id", "Name");
+            return View();
+        }
+        [HttpPost]
+        public IActionResult NewExpedition(Expedition e)
+        {
+            string date = e.StartDate.ToString().Substring(0,2);
+            if (date == "03" || date == "04" || date == "05")
+            {
+                e.Season = "Spring";
+            }
+            else if (date == "06" || date == "07" || date == "08")
+            {
+                e.Season = "Summer";
+            }
+            else if (date == "09" || date == "10" || date == "11")
+            {
+                e.Season = "Autumn";
+            }
+            else
+            {
+                e.Season = "Winter";
+            }
+            e.Year = e.StartDate.Year;
+            e.Peak = _context.Peaks.Find(e.PeakId);
+            e.TrekkingAgency = _context.TrekkingAgencies.Find(e.TrekkingAgencyId);
+
+            _context.Add(e);
+            _context.SaveChanges();
+
+            return RedirectToAction("Index");
         }
     }
 }

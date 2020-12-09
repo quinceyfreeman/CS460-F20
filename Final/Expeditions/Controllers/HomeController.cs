@@ -23,7 +23,17 @@ namespace Expeditions.Controllers
 
         public IActionResult Index()
         {
-            return View();
+            var peaks = dbContext.Peaks.Include(e => e.Expeditions).OrderByDescending(h => h.Height).Take(15);
+            return View(peaks);
+        }
+        public IActionResult Stats()
+        {
+            var data = new {
+                expeditions = dbContext.Expeditions.Count(),
+                peakCount = dbContext.Peaks.Count(),
+                notClimbed = dbContext.Peaks.Where(p => p.ClimbingStatus == false).Count()
+            };
+            return Json(data);
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

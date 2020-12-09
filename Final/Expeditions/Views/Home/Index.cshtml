@@ -1,5 +1,7 @@
-﻿@{
+﻿@model IQueryable<Peak>
+@{
     ViewData["Title"] = "Himalayan Expeditions";
+    int i = 0;
 }
 
 <div class="row">
@@ -12,7 +14,43 @@
 @*
     Your implementation here.  I will provide some html code for the home page at the exam.
 *@
-
+<div class="row">
+    <div class="col">
+        <h2 class="text-center">Climbing in the Himalaya</h2>
+        <p class="text-center" id="stats">@*Put stats from AJAX question here*@</p>
+        <table class="table table-dark table-striped table-sm w-75" style="margin: 0 auto;">
+            <thead>
+                <tr>
+                    <th scope="col" style="text-align:center">Rank</th>
+                    <th scope="col" style="text-align:center">Mountain</th>
+                    <th scope="col">Height</th>
+                    <th scope="col">First climbed</th>
+                    <th scope="col"># of Expeditions</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (Peak p in Model)
+                {
+                    i++;
+                    <tr>
+                    <th scope="col" style="text-align:center">@i</th>
+                    <th scope="col" style="text-align:center">@p.Name</th>
+                    <th scope="col">@p.Height</th>
+                    @if (@p.FirstAscentYear == null)
+                    {
+                        <th scope="col">--</th>
+                    }
+                    else
+                    {
+                    <th scope="col">@p.FirstAscentYear</th>
+                    }
+                    <th scope="col">@p.Expeditions.Count</th>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
 
 
 <small>Data and idea for this app: Binit Shrestha, WOU Senior project class 2020. Photo above <a href="https://en.wikipedia.org/wiki/Mount_Everest#/media/File:Mount_Everest_as_seen_from_Drukair2_PLW_edit.jpg">from Wikipedia</a>.  Data from <a href="https://github.com/rfordatascience/tidytuesday/blob/master/data/2020/2020-09-22/readme.md">R for Data Science TidyTuesday: Himalayan Climbing Expeditions</a></small>

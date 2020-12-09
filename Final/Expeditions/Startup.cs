@@ -51,6 +51,10 @@ namespace Expeditions
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(
+                    name: "API Stats",
+                    pattern: "/api/stats",
+                    defaults: new {controller = "Home", action = "Stats"});
+                endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
             });

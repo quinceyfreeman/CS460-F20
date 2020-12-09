@@ -8,4 +8,20 @@ $(document).ready(function () { window.setInterval(execute, 5000) });
 
 function execute() {
         console.log('Running execute function');
+        let address = "/api/stats";
+
+        $.ajax({
+                type: "GET",
+                dataType: "json",
+                url: address,
+                success: displayStats,
+                error: error
+        });
+}
+function displayStats(data) {
+        console.log(data);
+        $("#stats").text("Currently tracking " + data.expeditions + " for " + data.peakCount + " peaks, " + data.notClimbed + " of which have never been climbed!");
+}
+function error() {
+        console.log("Error");
 }
